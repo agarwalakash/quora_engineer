@@ -1,0 +1,21 @@
+<div style="float: right;">
+	<% if user_signed_in? %>
+		<%= link_to "My Topics", topic_index_path %>
+		<%= link_to "My Questions", questions_path %>
+		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+	<% end %>
+</div>
+
+<% if @questions.present? %>
+	<h3>Questions List</h3>
+	<table>
+		<% @questions.each do |question| %>
+			<tr>
+				<td><%= link_to question.content, question_path(question.id) %></td>
+			</tr>		
+		<% end %>
+	</table>
+<% else %>
+	<h3>Sorry, No Questions are available.</h3>
+<% end %>
+

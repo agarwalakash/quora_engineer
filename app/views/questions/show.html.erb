@@ -1,0 +1,37 @@
+<h1>Question Detail</h1>
+<p><b>User: </b><%= @question.user.email%></p>
+<% if current_user.id == @question.user_id%>
+<% else %>
+	<%= link_to "Follow User" %>
+<% end %>
+<p><b>Topic: </b><%= @question.topic.name%></p>
+<% if current_user.id == @question.user_id%>
+<% else %>
+	<%= link_to "Follow Topic" %>
+<% end %>
+<p><b>Question: </b> <%= @question.content %></p><br>
+<h3>Answers List</h3>
+<% if @answers.present? %>
+	<table>
+		<% @index = 1 %>
+		<% @answers.each do |answer| %>
+			<tr>
+				<td><b>Answer<%= @index %>:</b></td>
+				<td><%= answer.content %></td>
+			</tr>
+			<% @index += 1%>		
+		<% end %>
+	</table>
+<% else %>
+	<h3>Sorry, No Answers are available.</h3>
+<% end %>
+
+<% if user_signed_in? %>
+	<%= form_with(model: @answer, url: answers_path, method: "post", remote: false) do |f| %>
+		<%= f.text_area :content%>
+		<%= f.hidden_field :question_id, :value => @question.id%>
+		<%= f.submit "Create"%>
+	<% end %>
+<% else %>
+<p>Please login to answer!</p>
+<% end %>

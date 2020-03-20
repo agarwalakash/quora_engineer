@@ -1,0 +1,15 @@
+<div style="float: right;">
+	<%= link_to "Post a Question", new_question_path %>
+</div>
+<% if @questions.present? %>
+	<h3>My Questions List</h3>
+	<table>
+		<% @questions.each do |question| %>
+			<tr>
+				<td><%= question.content %></td>
+			</tr>		
+		<% end %>
+	</table>
+<% else %>
+	<h3>Sorry, No Questions are available.</h3>
+<% end %>

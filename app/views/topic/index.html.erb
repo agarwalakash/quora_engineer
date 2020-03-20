@@ -1,0 +1,11 @@
+<div style="float: right;">
+	<%= link_to "Create Topic", new_topic_path %>
+</div>
+<% if @topics.present? %>
+	<h3>Topics List</h3>
+	<% @topics.each do |topic| %>
+		<%= topic.name %>
+	<% end %>
+<% else %>
+	<h3>Sorry, No Topics are available.</h3>
+<% end %>

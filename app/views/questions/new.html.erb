@@ -1,0 +1,6 @@
+<%= form_with(model: @question, url: questions_path, method: "post", remote: false) do |f| %>
+	<label>Select Topic</label>
+	<%= f.select :topic, @topics.collect{|topic| [topic.name, topic.id]}%>
+	<%= f.text_area :content%>
+	<%= f.submit "Create"%>
+<% end %>
