@@ -3,7 +3,8 @@ class AnswersController < ApplicationController
   end
 
   def create
-  	@answer = Answer.create(content: params[:answer][:content], user_id: current_user.id, question_id: params[:answer][:question_id])
+    @answer = current_user.answers.create(answer_params)
+    @answer.question_id = params[:answer][:question_id]
   	if @answer.save!
   		redirect_to question_path(params[:answer][:question_id])
   	end
@@ -13,5 +14,9 @@ class AnswersController < ApplicationController
   end
 
   def new
+  end
+
+  def answer_params
+    params.require(:answer).permit(:content)
   end
 end

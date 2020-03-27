@@ -1,15 +1,14 @@
 <h1>Question Detail</h1>
 <p><b>User: </b><%= @question.user.email%></p>
-<% if current_user.id == @question.user_id%>
-<% else %>
-	<%= link_to "Follow User" %>
+<% unless current_user.id == @question.user_id %>
+	<%= render partial: "follows/form", locals: {followable: @question, type: "User"} %>
 <% end %>
 <p><b>Topic: </b><%= @question.topic.name%></p>
-<% if current_user.id == @question.user_id%>
-<% else %>
-	<%= link_to "Follow Topic" %>
+<% unless current_user.id == @question.user_id%>
+	<%= render partial: "follows/form", locals: {followable: @question.topic, type: "Topic"} %>
 <% end %>
 <p><b>Question: </b> <%= @question.content %></p><br>
+
 <h3>Answers List</h3>
 <% if @answers.present? %>
 	<table>

@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   def new
   	@question = Question.new
-  	@topics = Topic.all
+  	@topics = current_user.topics
   end
 
   def index
@@ -9,7 +9,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
-  	@question = Question.create(content: params[:question][:content], user_id: current_user.id, topic_id: params[:question][:topic])
+  	@question = current_user.questions.create(question_params)
+    @question.topic_id = params[:question][:topic_id]
+    @question.save
     redirect_to questions_path
   end
 
@@ -17,5 +19,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answers = @question.answers
     @answer = Answer.new
+  end
+
+  def question_params
+    params.require(:question).permit(:content)
   end
 end

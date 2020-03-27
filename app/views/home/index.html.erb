@@ -1,8 +1,8 @@
-<div style="float: right;">
+<div style="float: right; margin-right: 10px;">
 	<% if user_signed_in? %>
-		<%= link_to "My Topics", topic_index_path %>
+		<%= link_to "My Topics", topics_path %>
 		<%= link_to "My Questions", questions_path %>
-		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+		<%= link_to "My Followers", follows_path %>
 	<% end %>
 </div>
 

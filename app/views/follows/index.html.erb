@@ -1,0 +1,19 @@
+<h1>Followers List</h1>
+
+<% if @followers.present? %>
+	<% count = 1 %>
+	<table>
+		<% @followers.each do |follower| %>
+			<tr>
+				<th>
+					<%= count %>.
+				</th>
+				<th>
+					<%= follower.email %>
+				</th>
+			</tr>
+			<% count += 1%>
+		<% end %>
+	</table>
+	
+<% end %>
